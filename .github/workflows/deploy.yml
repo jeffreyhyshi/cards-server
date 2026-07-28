@@ -7,14 +7,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Deploy to Droplet
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          script: |
-            cd /srv/cards
-            git pull origin main
-            npm ci
-            pm2 reload ecosystem.config.js && pm2 startup
+          script: whoami && cd /srv/cards && git pull origin main && npm ci && pm2 reload ecosystem.config.js && pm2 startup
