@@ -5,6 +5,7 @@ on:
 
 jobs:
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Droplet
@@ -13,4 +14,4 @@ jobs:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          script: whoami && cd /srv/cards && git pull origin main && npm ci && pm2 reload ecosystem.config.js && pm2 startup
+          script: hostname -I && cd /srv/cards && git pull origin main && npm ci && pm2 reload ecosystem.config.js && pm2 startup
