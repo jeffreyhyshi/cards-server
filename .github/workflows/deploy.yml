@@ -14,4 +14,4 @@ jobs:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          script: cd /srv/cards && eval "$(ssh-agent -s)" && git pull origin main && npm ci && pm2 reload ecosystem.config.js && pm2 startup
+          script: cd /srv/cards && eval "$(ssh-agent -s)" && ssh-add && git pull origin main && npm ci && pm2 reload ecosystem.config.js && pm2 startup
